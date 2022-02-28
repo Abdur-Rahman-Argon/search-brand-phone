@@ -3,3 +3,17 @@
     /* text-align: center; */
     margin: auto;
 }
+
+.image-width-2 {
+    width: 40%;
+    /* text-align: center; */
+    margin: auto;
+}
+
+.textcenter {
+    text-align: center;
+}
+
+.card-width {
+    width: 500px;
+}
