@@ -1,13 +1,16 @@
 const displaySearch = document.getElementById("display-search");
+const detailContainer = document.getElementById("detail-container");
 const searchInput = document.getElementById("search-value");
 const searchError = document.getElementById("search-error");
+
 const searchLoad = async() => {
     const searchText = searchInput.value;
     searchInput.value = "";
 
     if (searchText == "") {
-        searchError.innerText = "Please give a phone name";
+        searchError.innerText = "Please input a phone name";
         displaySearch.textContent = "";
+        detailContainer.textContent = "";
     } else {
         searchError.innerText = "";
         const url = ` https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -16,6 +19,7 @@ const searchLoad = async() => {
         if (data.status === false) {
             searchError.innerText = "NO DATA FOUND";
             displaySearch.textContent = "";
+            detailContainer.textContent = "";
         }
         if (data.status === true) {
             displayData(data.data);
@@ -26,6 +30,7 @@ const searchLoad = async() => {
 
 const displayData = (datas) => {
     displaySearch.textContent = "";
+    console.log(datas.length);
     datas.forEach((data) => {
         const div = document.createElement("div");
         div.className = "col";
@@ -53,9 +58,9 @@ const detailLoad = (id) => {
 };
 
 const displayDetail = (detail) => {
-    console.log(detail.data.others.Bluetooth);
+    // console.log(detail.data.releaseDate || "date");
     const element = detail.data;
-    const displayDetail = document.getElementById("display-detail");
+    detailContainer.textContent = "";
     const div = document.createElement("div");
     div.className = "col";
     div.innerHTML = `
@@ -64,7 +69,7 @@ const displayDetail = (detail) => {
       <div class="card-body">
       <h5 class="textcenter"> ${element.name}</h5>
       <h5 class="textcenter"> ${element.brand}</h5>
-      <h5 class="textcenter"> ${element.releaseDate}</h5>
+      <h5 class="textcenter"> ${element.releaseDate || "no release date found"}</h5>
       <ul>
       <li>chipSet: ${element.mainFeatures.chipSet}</li>
       <li>displaySize: ${element.mainFeatures.displaySize}</li>
@@ -87,19 +92,5 @@ const displayDetail = (detail) => {
       </div>
     </div>
         `;
-    displayDetail.appendChild(div);
+    detailContainer.appendChild(div);
 };
-/* <h5 class="textcenter">${element.others.Bluetooth}</h5>
-      <h5 class="textcenter">${element.others.GPS}</h5>
-      <h5 class="textcenter">${element.others..NFC}</h5>
-      <h5 class="textcenter">${element.others.Radio}</h5>
-      <h5 class="textcenter">${element.others.USB}</h5>
-      <h5 class="textcenter">${element.others.WLAN}</h5> */
-// thers:
-// : "5.0, A2DP, LE"
-// GPS: "Yes, with A-GPS, GLONASS, GALILEO, QZSS"
-// NFC: "Yes"
-// Radio: "No"
-// USB: "No"
-// WLAN: "Wi-Fi 802.11 b/g/n"
-// [[
