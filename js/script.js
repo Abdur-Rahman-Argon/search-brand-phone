@@ -33,7 +33,8 @@ const searchLoad = async() => {
 /* search display part start */
 const displayData = (datas) => {
     displaySearch.textContent = "";
-    console.log(datas.length);
+    detailContainer.textContent = "";
+    // console.log(datas);
     for (let i = 0; i < 20; i++) {
         /* max 20 search element */
         const data = datas[i];
@@ -68,7 +69,8 @@ const detailLoad = (id) => {
 
 /* detail display part start */
 const displayDetail = (detail) => {
-    // console.log(detail.data.releaseDate || "date");
+    // console.log(detail.data.releaseDate )
+    console.log(detail.data.othersBluetooth || "date");
     const element = detail.data;
     detailContainer.textContent = "";
     const div = document.createElement("div");
@@ -93,12 +95,12 @@ const displayDetail = (detail) => {
       </ul>
       </li>
       </ul> 
-      <h5 >Bluetooth: ${element.others.Bluetooth}</h5>
-      <h5 >GPS: ${element.others.GPS}</h5>
-      <h5 >NFC: ${element.others.NFC}</h5>
-      <h5 >Radio: ${element.others.Radio}</h5>
-      <h5 >USB: ${element.others.USB}</h5>
-      <h5 >WLAN: ${element.others.WLAN}</h5>
+      <h5 >Bluetooth: ${element?.others?.Bluetooth || "no information"}</h5>
+      <h5 >GPS: ${element?.others?.GPS || "no information"}</h5>
+      <h5 >NFC: ${element?.others?.NFC || "no information"}</h5>
+      <h5 >Radio: ${element?.others?.Radio || "no information"}</h5>
+      <h5 >USB: ${element?.others?.USB || "no information"}</h5>
+      <h5 >WLAN: ${element?.others?.WLAN || "no information"}</h5>
       </div>
     </div>
         `;
