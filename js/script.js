@@ -42,7 +42,7 @@ const displayData = (datas) => {
         const div = document.createElement("div");
         div.className = "col";
         div.innerHTML = `
-            <div class="card p-3 text-center" style="width: 18rem">
+            <div class="card mx-auto p-3 text-center" style="width: 18rem">
                  <img  src=" ${data.image}" class="card-img-top image-width" alt="..." />
                 <div class="card-body">
                     <h5 class="card-title">${data.phone_name}</h5>
@@ -74,9 +74,9 @@ const displayDetail = (detail) => {
     const element = detail.data;
     detailContainer.textContent = "";
     const div = document.createElement("div");
-    div.className = "col";
+    div.className = "col mx-auto";
     div.innerHTML = `
-    <div class="card p-3 mx-auto card-width">
+    <div class="card p-3 ">
       <img  src=" ${element.image}" class="card-img-top image-width-2" alt="..." />
       <div class="card-body">
       <h5 class="textcenter"> ${element.name}</h5>
