@@ -1,14 +1,16 @@
+//  global Varibale declare
 const displaySearch = document.getElementById("display-search");
 const detailContainer = document.getElementById("detail-container");
 const searchInput = document.getElementById("search-value");
 const searchError = document.getElementById("search-error");
 
+/* search load part start */
 const searchLoad = async() => {
     const searchText = searchInput.value;
     searchInput.value = "";
 
     if (searchText == "") {
-        searchError.innerText = "Please input a phone name";
+        searchError.innerText = "Please input a phone name"; /* error */
         displaySearch.textContent = "";
         detailContainer.textContent = "";
     } else {
@@ -17,7 +19,7 @@ const searchLoad = async() => {
         const res = await fetch(url);
         const data = await res.json();
         if (data.status === false) {
-            searchError.innerText = "NO DATA FOUND";
+            searchError.innerText = "NO DATA FOUND"; /* error */
             displaySearch.textContent = "";
             detailContainer.textContent = "";
         }
@@ -27,11 +29,15 @@ const searchLoad = async() => {
         console.log(data.status);
     }
 };
-
+/* search load part end */
+/* search display part start */
 const displayData = (datas) => {
     displaySearch.textContent = "";
     console.log(datas.length);
-    datas.forEach((data) => {
+    for (let i = 0; i < 20; i++) {
+        /* max 20 search element */
+        const data = datas[i];
+        // datas.forEach((data) => {
         const div = document.createElement("div");
         div.className = "col";
         div.innerHTML = `
@@ -46,9 +52,11 @@ const displayData = (datas) => {
             </div>
         `;
         displaySearch.appendChild(div);
-    });
+    }
 };
+/* search display part end */
 
+/* detail load part start */
 const detailLoad = (id) => {
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     fetch(url)
@@ -56,7 +64,9 @@ const detailLoad = (id) => {
         .then((data) => displayDetail(data));
     // console.log(data);
 };
+/* detail load part end */
 
+/* detail display part start */
 const displayDetail = (detail) => {
     // console.log(detail.data.releaseDate || "date");
     const element = detail.data;
@@ -94,3 +104,4 @@ const displayDetail = (detail) => {
         `;
     detailContainer.appendChild(div);
 };
+/* detail display end */
